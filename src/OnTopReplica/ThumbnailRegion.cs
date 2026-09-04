@@ -55,6 +55,20 @@ namespace OnTopReplica {
         private Rectangle _bounds;
 
         /// <summary>
+        /// Creates an independent copy of this region.
+        /// </summary>
+        /// <remarks>
+        /// Stored regions are handed out to the thumbnail panel and to the region side panel, both of which
+        /// may alter the instance they are given (see RegionPanel's relative/absolute switch). Cloning keeps
+        /// those edits from writing back into the user's saved presets.
+        /// This must live on the class itself: the copy needs the raw <see cref="_bounds"/> value, while the
+        /// <see cref="Bounds"/> getter throws in DEBUG builds while in relative mode.
+        /// </remarks>
+        public ThumbnailRegion Clone() {
+            return new ThumbnailRegion(_bounds, Relative);
+        }
+
+        /// <summary>
         /// Gets or sets the bounds of the thumbnail region.
         /// </summary>
         public Rectangle Bounds {

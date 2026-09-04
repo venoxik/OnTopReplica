@@ -77,12 +77,28 @@ namespace OnTopReplica {
             Program.Platform.PostHandleFormInit(this);
         }
 
+        /// <summary>
+        /// Set while startup options are being applied.
+        /// </summary>
+        /// <remarks>
+        /// Options.Apply has its own chrome step, placed after the location so that the frame border
+        /// compensation lands correctly. SetThumbnail must not pre-empt it, or the shift is applied
+        /// before the location is assigned and is then thrown away.
+        /// </remarks>
+        bool _applyingStartupOptions = false;
+
         protected override void OnShown(EventArgs e) {
             Log.Write("Main form shown");
             base.OnShown(e);
 
             //Apply startup options
-            _startupOptions.Apply(this);
+            _applyingStartupOptions = true;
+            try {
+                _startupOptions.Apply(this);
+            }
+            finally {
+                _applyingStartupOptions = false;
+            }
         }
 
         protected override void OnClosing(CancelEventArgs e) {
@@ -121,7 +137,9 @@ namespace OnTopReplica {
             base.OnActivated(e);
 
             //Deactivate click-through if form is reactivated
-            if (ClickThroughEnabled) {
+            //(suppressed while a preset is being applied: applying one causes activation of its own,
+            // which would immediately undo the click-through the preset just asked for)
+            if (!_applyingPreset && ClickThroughEnabled) {
                 ClickThroughEnabled = false;
             }
 
@@ -310,6 +328,14 @@ namespace OnTopReplica {
 
                 //Set aspect ratio (this will resize the form), do not refresh if in fullscreen
                 SetAspectRatio(_thumbnailPanel.ThumbnailPixelSize, !FullscreenManager.IsFullscreen);
+
+                //Chrome can only be hidden while a thumbnail is shown, so this is the first moment
+                //the user's standing border preference can take effect for a newly cloned window.
+                //A preset that stores an explicit chrome state overrides this afterwards.
+                //Skipped at startup: Options.Apply hides chrome itself, after assigning the location.
+                if (!_applyingStartupOptions && Settings.Default.HideWindowBorder) {
+                    IsChromeVisible = false;
+                }
             }
             catch (Exception ex) {
                 Log.WriteException("Unable to set new thumbnail", ex);

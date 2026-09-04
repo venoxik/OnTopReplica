@@ -40,6 +40,14 @@ namespace OnTopReplica.StartupOptions {
             }
 
             if (Settings.Default.RestoreLastWindow) {
+                //A preset supersedes the plain last-window restore: it knows the region, geometry and
+                //options too, and finds its own window.
+                var preset = FindLastPreset();
+                if (preset != null) {
+                    options.Preset = preset;
+                    return;
+                }
+
                 var handle = Settings.Default.RestoreLastWindowHwnd;
                 var title = Settings.Default.RestoreLastWindowTitle;
                 var className = Settings.Default.RestoreLastWindowClass;
@@ -63,6 +71,25 @@ namespace OnTopReplica.StartupOptions {
                     );
                 }
             }
+        }
+
+        /// <summary>
+        /// Gets the last applied preset, if it still exists and still carries window settings.
+        /// </summary>
+        private static StoredRegion FindLastPreset() {
+            var name = Settings.Default.LastPresetName;
+            if (string.IsNullOrEmpty(name) || Settings.Default.SavedRegions == null)
+                return null;
+
+            var preset = Settings.Default.SavedRegions.FirstOrDefault(r =>
+                string.Equals(r.Name, name, StringComparison.CurrentCultureIgnoreCase));
+
+            //A plain crop region saved by an older version knows no window and no geometry, so there is
+            //nothing to restore from it: fall back to the regular last-window handling.
+            if (preset == null || !preset.HasSourceWindow)
+                return null;
+
+            return preset;
         }
 
         private static void ParseCommandLine(string[] args, Options options) {

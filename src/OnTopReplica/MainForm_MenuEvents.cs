@@ -19,6 +19,7 @@ namespace OnTopReplica {
             bool showing = _thumbnailPanel.IsShowingThumbnail;
 
             selectRegionToolStripMenuItem.Enabled = showing;
+            savePresetToolStripMenuItem.Enabled = CanCapturePreset;
             switchToWindowToolStripMenuItem.Enabled = showing;
             resizeToolStripMenuItem.Enabled = showing;
             chromeToolStripMenuItem.Checked = IsChromeVisible;
@@ -84,6 +85,10 @@ namespace OnTopReplica {
 
         private void Menu_Region_click(object sender, EventArgs e) {
             SetSidePanel(new OnTopReplica.SidePanels.RegionPanel());
+        }
+
+        private void Menu_SavePreset_click(object sender, EventArgs e) {
+            SetSidePanel(new OnTopReplica.SidePanels.SavePresetPanel());
         }
 
         private void Menu_Resize_opening(object sender, CancelEventArgs e) {
@@ -156,7 +161,15 @@ namespace OnTopReplica {
         }
 
         private void Menu_Chrome_click(object sender, EventArgs e) {
-            IsChromeVisible = !IsChromeVisible;
+            bool wantVisible = !IsChromeVisible;
+
+            //Record the intent, NOT the resulting state. Hiding the border is refused while no
+            //thumbnail is shown, so reading IsChromeVisible back would store the exact opposite of
+            //what the user just asked for, and the preference would never take effect.
+            Settings.Default.HideWindowBorder = !wantVisible;
+            MainForm.PersistSettings();
+
+            IsChromeVisible = wantVisible;
         }
 
         private void Menu_Settings_click(object sender, EventArgs e) {

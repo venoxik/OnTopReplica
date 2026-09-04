@@ -134,8 +134,12 @@ namespace OnTopReplica {
 
             var tsi = (ToolStripMenuItem)sender;
             var tuple = (Tuple<WindowHandle, StoredRegion>)tsi.Tag;
-            _owner.SetThumbnail(tuple.Item1,
-                (tuple.Item2 != null) ? (ThumbnailRegion)tuple.Item2.Region : null);
+
+            //Deferred to the next pass of the message loop, so that the preset is applied after the
+            //menus above have finished tearing down and have stopped raising activation.
+            _owner.BeginInvoke((MethodInvoker)delegate {
+                _owner.ApplyPreset(tuple.Item1, tuple.Item2);
+            });
         }
 
         /*PluginRegionLocator _pluginRegionLocator = null;

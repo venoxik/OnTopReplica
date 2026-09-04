@@ -47,6 +47,15 @@ namespace OnTopReplica.StartupOptions {
 
         public bool MustBeVisible { get; set; }
 
+        /// <summary>
+        /// Full preset to restore at startup, or null.
+        /// </summary>
+        /// <remarks>
+        /// When set, it takes over the whole of <see cref="Apply"/>: presets have their own ordering
+        /// (chrome before position, among others) and must not be re-expressed as the fields above.
+        /// </remarks>
+        public StoredRegion Preset { get; set; }
+
         #endregion
 
         #region Options
@@ -99,6 +108,14 @@ namespace OnTopReplica.StartupOptions {
 
         public void Apply(MainForm form) {
             Log.Write("Applying command line launch parameters");
+
+            //A preset carries everything and applies it in its own order: hand over completely rather
+            //than half-applying the fields below first.
+            if (Preset != null) {
+                Log.Write("Restoring preset '{0}'", Preset.Name);
+                form.ApplyPreset(null, Preset);
+                return;
+            }
 
             form.Opacity = (double)Opacity / 255.0;
 
@@ -168,7 +185,10 @@ namespace OnTopReplica.StartupOptions {
                 form.ClickThroughEnabled = true;
             }
 
-            form.IsChromeVisible = !DisableChrome;
+            //The standing "hide window border" preference overrides the restored chrome state.
+            //This must stay after the location is assigned: hiding chrome shifts the window by a
+            //frame border, which is how a position stored "with chrome" is converted back.
+            form.IsChromeVisible = !DisableChrome && !Properties.Settings.Default.HideWindowBorder;
 
             //Fullscreen
             if (Fullscreen) {

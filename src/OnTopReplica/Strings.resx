@@ -504,6 +504,33 @@ You can enable click-through later</value>
   <data name="MenuRegion" xml:space="preserve">
     <value>Select region...</value>
   </data>
+  <data name="MenuSavePreset" xml:space="preserve">
+    <value>Save current setup as preset...</value>
+  </data>
+  <data name="MenuSavePresetTT" xml:space="preserve">
+    <value>Stores the current region, window position, size and opacity under a name, so that selecting it later restores all of them at once.</value>
+  </data>
+  <data name="PresetsTitle" xml:space="preserve">
+    <value>Save preset</value>
+  </data>
+  <data name="PresetsName" xml:space="preserve">
+    <value>Preset name:</value>
+  </data>
+  <data name="PresetsClickThrough" xml:space="preserve">
+    <value>Enable click-through</value>
+  </data>
+  <data name="PresetsClickThroughTT" xml:space="preserve">
+    <value>Makes the replica ignore mouse clicks when this preset is applied, so that clicks reach whatever is underneath it.</value>
+  </data>
+  <data name="PresetsSaveButton" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="PresetsCancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="PresetsOverwrite" xml:space="preserve">
+    <value>Replaces the existing preset with this name.</value>
+  </data>
   <data name="MenuRegionTT" xml:space="preserve">
     <value>Switches to "region mode", that allows you to select a limited region of the source's window as thumbnail.</value>
   </data>
