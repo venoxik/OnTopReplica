@@ -136,6 +136,9 @@
     <Compile Include="MainForm_ChildForms.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="MainForm_Presets.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="MessagePumpManager.cs" />
     <Compile Include="MessagePumpProcessors\FlashCloner.cs" />
     <Compile Include="MessagePumpProcessors\GroupSwitchManager.cs" />
@@ -405,6 +408,10 @@
       <DependentUpon>RegionPanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="SidePanels\SavePresetPanel.resx">
+      <DependentUpon>SavePresetPanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Strings.no.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.no.Designer.cs</LastGenOutput>
@@ -428,6 +435,12 @@
     </Compile>
     <Compile Include="SidePanels\RegionPanel.Designer.cs">
       <DependentUpon>RegionPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SidePanels\SavePresetPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SidePanels\SavePresetPanel.Designer.cs">
+      <DependentUpon>SavePresetPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="StoredRegion.cs" />
     <Compile Include="StoredRegionArray.cs" />

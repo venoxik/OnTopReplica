@@ -249,5 +249,29 @@ namespace OnTopReplica.Properties {
                 this["RestoreLastShowChrome"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LastPresetName {
+            get {
+                return ((string)(this["LastPresetName"]));
+            }
+            set {
+                this["LastPresetName"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool HideWindowBorder {
+            get {
+                return ((bool)(this["HideWindowBorder"]));
+            }
+            set {
+                this["HideWindowBorder"] = value;
+            }
+        }
     }
 }

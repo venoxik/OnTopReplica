@@ -51,6 +51,9 @@ namespace OnTopReplica {
                     TopMost = true;
                 }
 
+                //NOTE: this assignment must stay AFTER the Activate() call above. Activate() delivers
+                //WM_ACTIVATE synchronously, and MainForm.OnActivated turns click-through back off when
+                //it sees it enabled. Assigning first makes enabling click-through undo itself.
                 _clickThrough = value;
             }
         }
@@ -106,6 +109,12 @@ namespace OnTopReplica {
                 return (FormBorderStyle == DefaultBorderStyle);
             }
             set {
+                //Nothing to do. Importantly, the shifts below are NOT idempotent: re-asserting the
+                //current state would move the window by a frame border every single time, and
+                //Options.Apply does exactly that on every launch.
+                if (value == IsChromeVisible)
+                    return;
+
                 //Cancel hiding chrome if no thumbnail is shown
                 if (!value && !_thumbnailPanel.IsShowingThumbnail)
                     return;

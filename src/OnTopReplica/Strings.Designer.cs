@@ -1184,7 +1184,88 @@ namespace OnTopReplica {
                 return ResourceManager.GetString("MenuRegionTT", resourceCulture);
             }
         }
-        
+
+        /// <summary>
+        ///   Looks up a localized string similar to Save current setup as preset....
+        /// </summary>
+        internal static string MenuSavePreset {
+            get {
+                return ResourceManager.GetString("MenuSavePreset", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Stores the current region, window position, size and opacity under a name.
+        /// </summary>
+        internal static string MenuSavePresetTT {
+            get {
+                return ResourceManager.GetString("MenuSavePresetTT", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Save preset.
+        /// </summary>
+        internal static string PresetsTitle {
+            get {
+                return ResourceManager.GetString("PresetsTitle", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Preset name:.
+        /// </summary>
+        internal static string PresetsName {
+            get {
+                return ResourceManager.GetString("PresetsName", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Enable click-through.
+        /// </summary>
+        internal static string PresetsClickThrough {
+            get {
+                return ResourceManager.GetString("PresetsClickThrough", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Makes the replica ignore mouse clicks when this preset is applied.
+        /// </summary>
+        internal static string PresetsClickThroughTT {
+            get {
+                return ResourceManager.GetString("PresetsClickThroughTT", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string PresetsSaveButton {
+            get {
+                return ResourceManager.GetString("PresetsSaveButton", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string PresetsCancelButton {
+            get {
+                return ResourceManager.GetString("PresetsCancelButton", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Replaces the existing preset with this name.
+        /// </summary>
+        internal static string PresetsOverwrite {
+            get {
+                return ResourceManager.GetString("PresetsOverwrite", resourceCulture);
+            }
+        }
+
         /// <summary>
         ///   查詢類似 Reset window 的當地語系化字串。
         /// </summary>

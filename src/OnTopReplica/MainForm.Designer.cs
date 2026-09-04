@@ -33,6 +33,7 @@
             this.noneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.switchToWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectRegionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.savePresetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.advancedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clickForwardingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clickThroughToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -89,6 +90,7 @@
             this.menuContextWindows,
             this.switchToWindowToolStripMenuItem,
             this.selectRegionToolStripMenuItem,
+            this.savePresetToolStripMenuItem,
             this.advancedToolStripMenuItem,
             this.menuContextOpacity,
             this.resizeToolStripMenuItem,
@@ -144,6 +146,16 @@
             this.selectRegionToolStripMenuItem.Text = global::OnTopReplica.Strings.MenuRegion;
             this.selectRegionToolStripMenuItem.ToolTipText = global::OnTopReplica.Strings.MenuRegionTT;
             this.selectRegionToolStripMenuItem.Click += new System.EventHandler(this.Menu_Region_click);
+            //
+            // savePresetToolStripMenuItem
+            //
+            this.savePresetToolStripMenuItem.Enabled = false;
+            this.savePresetToolStripMenuItem.Image = global::OnTopReplica.Properties.Resources.regions;
+            this.savePresetToolStripMenuItem.Name = "savePresetToolStripMenuItem";
+            this.savePresetToolStripMenuItem.Size = new System.Drawing.Size(186, 22);
+            this.savePresetToolStripMenuItem.Text = global::OnTopReplica.Strings.MenuSavePreset;
+            this.savePresetToolStripMenuItem.ToolTipText = global::OnTopReplica.Strings.MenuSavePresetTT;
+            this.savePresetToolStripMenuItem.Click += new System.EventHandler(this.Menu_SavePreset_click);
             // 
             // advancedToolStripMenuItem
             // 
@@ -561,6 +573,7 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reduceToIconToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem selectRegionToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem savePresetToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem resizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem noneToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem switchToWindowToolStripMenuItem;

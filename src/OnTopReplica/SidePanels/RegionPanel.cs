@@ -293,7 +293,16 @@ namespace OnTopReplica.SidePanels {
                     return;
                 }
 
-                SetRegion(region.Region);
+                if (region.Region == null) {
+                    //Whole-window preset: nothing to crop.
+                    Reset();
+                    ParentMainForm.SelectedThumbnailRegion = null;
+                    return;
+                }
+
+                //Cloned: the panel hands this instance to the thumbnail and may switch it between
+                //relative and absolute mode, which would otherwise rewrite the stored preset.
+                SetRegion(region.Region.Clone());
             }
         }
 
